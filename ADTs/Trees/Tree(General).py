@@ -6,13 +6,15 @@ class Tree:
         self.left = None
         self.right = None
 
+    ################################ Depth First Search ################################
+
     # Pre Order Code (root-left-right)
-    def preorder(self, node):  # Fixed spelling
+    def preorder(self, node):
         if node == None:
             return
-        print(node.val, end=" ")  # Changed from node.data to node.val
-        self.preorder(node.left)   # Fixed spelling
-        self.preorder(node.right)  # Fixed spelling
+        print(node.val, end=" ")
+        self.preorder(node.left)
+        self.preorder(node.right)
 
     # In Order (left-root-right)
     def inorder(self,node):
@@ -30,7 +32,9 @@ class Tree:
         self.postorder(node.right)
         print(node.val, end=" ")
 
-    # Breadth First Traversal (Level Order)
+    ################################ Breadth First Search ################################
+
+    # Level Order
     def level_order(self,node):
         result = []
         queue = deque([])
@@ -46,7 +50,7 @@ class Tree:
 
     def height(self, node):
         if node is None:
-            return -1  # use -1 so a single node has height 0
+            return -1
         left_h = self.height(node.left)
         right_h = self.height(node.right)
         return 1 + max(left_h, right_h)
@@ -57,38 +61,25 @@ class Tree:
         return 1 + self.count_nodes(node.left) + self.count_nodes(node.right)
 
 
-T1 = Tree(1)
-T2 = Tree(2)
-T3 = Tree(3)
-T4 = Tree(4)
-T5 = Tree(5)
-T6 = Tree(6)
-T7 = Tree(7)
-T8 = Tree(8)
-T9 = Tree(9)
-T10 = Tree(10)
+T1 = Tree("Drinks")
+T2 = Tree("Hot")
+T3 = Tree("Cold")
+T4 = Tree("Coffee")
+T5 = Tree("Tea")
+T6 = Tree("Cola")
+T7 = Tree("Fanta")
 
-T3.left = T2
-T3.right = T9
-T8.left = T1
-T8.right = T6
-T4.left = T8
-T4.right = T10
-T5.left = T3
-T5.right = T4
+T1.left = T2
+T1.right = T3
+T2.left = T4
+T2.right = T5
+T3.left = T6
+T3.right = T7
 
-T5.preorder(T5)
+T1.preorder(T1)
 print()
-T5.inorder(T5)
+T1.inorder(T1)
 print()
-T5.postorder(T5)
+T1.postorder(T1)
 print()
-print(T5.level_order(T5))
-"""
-        5
-       / \
-      3   4
-     / \  / \
-    2  9 8  10
-        / \
-       1   6    """
+print(T1.level_order(T1))
