@@ -87,6 +87,8 @@ H.add(6073, "Ahmed")
 H.add(6001, "Sufyan")
 H.add(6123, "Adil")
 
+print(H.show_list())
+
 print("Min:", H.min())
 print("Removed:", H.remove_min())
 print("New Min:", H.min())
