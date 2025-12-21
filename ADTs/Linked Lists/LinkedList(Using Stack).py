@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self,val,next = None):
-        self.value = val
+    def __init__(self,data,next = None):
+        self.data = data
         self.next = next
 
 class LinkedStack:
@@ -8,20 +8,23 @@ class LinkedStack:
         self.head = None
         self.n = 0
 
-    def length(self):
+    def getlength(self):
         return self.n
 
     def is_empty(self):
-        return self.length() == 0
+        return self.getlength() == 0
 
-    def push(self,e):
-        node = Node(e)
+    def top_of_Linked_Stack(self):
+        return self.head.data
+
+    def push(self,value):
+        new_node = Node(value)
         if self.is_empty():
-            self.head = node
+            self.head = new_node
             self.n += 1
         else:
-            node.next = self.head
-            self.head = node
+            new_node.next = self.head
+            self.head = new_node
             self.n += 1
 
     def pop(self):
@@ -37,52 +40,21 @@ class LinkedStack:
         else:
             current = self.head
             while current is not None:
-                print(current.value,"->",end=" ")
+                print(current.data,end=" ")
                 current = current.next
             print()
 
-    def product(self):
-        if self.is_empty():
-            print("Linked Stack is Empty")
-            return None
-        else:
-            node_Product = 1
-            current = self.head
-            while current is not None:
-                node_Product *= current.value
-                current = current.next
-            return node_Product
+    def display_Linked_Stack(self):
+        print("Linked Stack:")
+        self.traversal()
+        print(f"Top of Linked Stack: {self.top_of_Linked_Stack()}")
+        print(f"Length of Linked Stack: {self.getlength()}")
 
-    # def sum(self):
-    #     if self.is_empty():
-    #         print("Linked Stack is Empty")
-    #         return None
-    #     else:
-    #         current = self.head
-    #         node_sum = 0
-    #         while current is not None:
-    #             node_sum += current.value
-    #             current = current.next
-    #         return node_sum
 
-    def sum_helper(self,node):
-        if node is None:
-            return 0
-        else:
-            return node.value + self.sum_helper(node.next)
-
-    def sum(self):
-        if self.is_empty():
-            print("Linked Stack is Empty")
-            return None
-        else:
-            return self.sum_helper(self.head)
-
-LS1 = LinkedStack()
-LS1.push(7)
-LS1.push(6)
-LS1.push(8)
-LS1.push(4)
-LS1.push(1)
-LS1.traversal()
-print("Sum of Nodes =", LS1.sum())
+LS = LinkedStack()
+LS.push(1)
+LS.push(2)
+LS.push(4)
+LS.push(10)
+LS.push(50)
+LS.display_Linked_Stack()

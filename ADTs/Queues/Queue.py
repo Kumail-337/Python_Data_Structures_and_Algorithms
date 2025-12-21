@@ -39,7 +39,6 @@ class Queue:
         print(f"Size of Queue: {self.sizeOfQueue()}")
         print()
 
-
 Q1 = Queue()
 Q1.enqueue(10)
 Q1.enqueue(15)
