@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, element, parent=None, left=None, right=None):
         self.element = element
@@ -89,16 +92,6 @@ class LinkedBinaryTree:
     def is_leaf(self, p):
         return self.num_children(p) == 0
 
-    def depth(self, p):
-        if p == self.root():
-            return 0
-        return 1 + self.depth(self.parent(p))
-
-    def height(self, p):
-        if self.is_leaf(p):
-            return 0
-        return 1 + max(self.height(c) for c in self.children(p))
-
     def delete(self, p):
         node = self._validate(p)
 
@@ -123,13 +116,49 @@ class LinkedBinaryTree:
         node.parent = node
         return node.element
 
+    def depth(self, p):
+        if p == self.root():
+            return 0
+        return 1 + self.depth(self.parent(p))
+
+    def height(self, p):
+        if self.is_leaf(p):
+            return 0
+        return 1 + max(self.height(c) for c in self.children(p))
+
     def preorder(self, node):
-        if node is None:
+        if node == None:
             return
         print(node.element, end=" ")
         self.preorder(node.left)
         self.preorder(node.right)
 
+    def inorder(self,node):
+        if node == None:
+            return
+        self.inorder(node.left)
+        print(node.element, end=" ")
+        self.inorder(node.right)
+
+    def postorder(self,node):
+        if node == None:
+            return
+        self.postorder(node.left)
+        self.postorder(node.right)
+        print(node.element, end=" ")
+
+    def level_order(self,node):
+        result = []
+        queue = deque([])
+        queue.append(node)
+        while len(queue) != 0:
+            e = queue.popleft()
+            result.append(e.element)
+            if e.left is not None:
+                queue.append(e.left)
+            if e.right is not None:
+                queue.append(e.right)
+        return result
 
 # -------- TEST --------
 tree = LinkedBinaryTree()
@@ -147,6 +176,12 @@ tree.add_right(right, "Fanta")
 
 print("\nPreorder:")
 tree.preorder(tree._root)
+print("\nIn order:")
+tree.inorder(tree._root)
+print("\nPost order:")
+tree.postorder(tree._root)
+print("\nLevel order:")
+print(tree.level_order(tree._root))
 
 print("\nDepth of Tea:", tree.depth(tree.left(left)))
 print("Height of tree:", tree.height(root))
